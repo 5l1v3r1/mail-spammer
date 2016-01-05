@@ -35,9 +35,9 @@ class spammer():
         print "[!] Engaging the target"
         for i in xrange(spams):
 
-            subj = random.randrange(0,100)
-            content = random.randrange(0,100)
-            name = random.randrange(0,100)
+            subj = random.randrange(0,999999999999999999)
+            content = random.randrange(0,999999999999999999)
+            name = random.randrange(0,999999999999999999)
             date = datetime.datetime.now().strftime( "%d/%m/%Y %H:%M" )
             msg = "From: %s\nTo: %s\nSubject: %s\nDate: %s\n\n%s" % (name, target, subj, date, content)
 
