@@ -1,43 +1,52 @@
-# Mail Spammer by Hades.y2k
-# <29/05/2015>
-
+# -*- coding: UTF-8 -*-
 import smtplib
 import datetime
+import random
+import getpass
 
 class spammer():
-
     def __init__(self):
-        self.spamtp()
+        self.banner()
+        self.spam()
 
-    def spamtp(self):
-        print "\t/*----------------------------*/"
-        print "\t/* MAIL SPAMMER BY HADES.Y2K */"
-        print "\t/*---------------------------*/\n"
+    def banner(self):
+        print """
+ ███████╗██████╗  █████╗ ███╗   ███╗███╗   ███╗███████╗██████╗
+ ██╔════╝██╔══██╗██╔══██╗████╗ ████║████╗ ████║██╔════╝██╔══██╗
+ ███████╗██████╔╝███████║██╔████╔██║██╔████╔██║█████╗  ██████╔╝
+ ╚════██║██╔═══╝ ██╔══██║██║╚██╔╝██║██║╚██╔╝██║██╔══╝  ██╔══██╗
+ ███████║██║     ██║  ██║██║ ╚═╝ ██║██║ ╚═╝ ██║███████╗██║  ██║
+ ╚══════╝╚═╝     ╚═╝  ╚═╝╚═╝     ╚═╝╚═╝     ╚═╝╚══════╝╚═╝  ╚═╝
+                                                            Hades.y2k
+                                                            """
 
-        youradd = raw_input("Enter Your Email. ")
-        targetadd = raw_input("Enter Your Target Email. ")
-        
+    def spam(self):
         # Credentials
-        username = raw_input("Enter the Username: ")
-        password = raw_input("Enter the Password: ")
-
-        subj = raw_input("Enter Your Email Subject. ")
-        txt = raw_input("Enter the Message You Want to Send. ")
-        spams = int(raw_input("How Many Times Do You Wanna Spam? "))
-
-        date = datetime.datetime.now().strftime( "%d/%m/%Y %H:%M" )
-        msg = "From: %s\nTo: %s\nSubject: %s\nDate: %s\n\n%s" % (youradd, targetadd, subj, date, txt)
+        username = "testing.pylab@gmail.com"
+        password = "pylab@2016" #getpass.getpass()
+        target = raw_input("Target email: ")
+        spams = input("No. of mails to send:  ")
 
         server = smtplib.SMTP('smtp.gmail.com:587')
         server.starttls()
-        server.login(username, password)
+        try: server.login(username, password)
+        except: print "[-] Authentication Error" ; exit()
 
-        print "[!] Engaging the Target.\n"
+        print "[!] Engaging the target"
         for i in xrange(spams):
-            server.sendmail(youradd, targetadd, msg)
-            print "[!] Message Sent."
-        server.quit()
-        print "\n[!] Target Engaging Complete."
 
-if __name__ == "__main__":
+            subj = random.randrange(0,100)
+            content = random.randrange(0,100)
+            name = random.randrange(0,100)
+            date = datetime.datetime.now().strftime( "%d/%m/%Y %H:%M" )
+            msg = "From: %s\nTo: %s\nSubject: %s\nDate: %s\n\n%s" % (name, target, subj, date, content)
+
+            server.sendmail(username, target, msg)
+        server.quit()
+        print "[+] Target engaging complete"
+
+try:
     spammer()
+except KeyboardInterrupt:
+    print "\n[-] Program Interrupted"
+    exit()
