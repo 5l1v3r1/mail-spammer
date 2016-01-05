@@ -22,8 +22,8 @@ class spammer():
 
     def spam(self):
         # Credentials
-        username = "testing.pylab@gmail.com"
-        password = "pylab@2016" #getpass.getpass()
+        username = raw_input("Enter your gmail: ")
+        password = getpass.getpass()
         target = raw_input("Target email: ")
         spams = input("No. of mails to send:  ")
 
