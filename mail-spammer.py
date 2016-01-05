@@ -42,7 +42,7 @@ class spammer():
             msg = "From: %s\nTo: %s\nSubject: %s\nDate: %s\n\n%s" % (name, target, subj, date, content)
 
             try: server.sendmail(username, target, msg)
-        	except smtplib.SMTPException:
+            except smtplib.SMTPException:
         		print "[-] An Error Occured During Process"
         		print "[!] The target email might be wrong"
         		exit()
